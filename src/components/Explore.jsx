@@ -1,6 +1,6 @@
 import React from 'react'
 import Map from './Map/MapContainer'
-import SearchMap from './SearchMap/SearchMapComponent'
+import SearchMap from './SearchMap/SearchMapContainer'
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 
 export default class Explore extends React.Component{

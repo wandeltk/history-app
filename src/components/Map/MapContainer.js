@@ -4,7 +4,10 @@ import {setThisPlace, clearThisPlace} from '../../Actions/ThisPlaceAction'
 import MapComponent from './MapComponent'
 
 const mapStateToProps = (state) => ({
-    thisPlace: state.thisPlaceReducer.thisPlace
+    thisPlace: state.thisPlaceReducer.thisPlace,
+    states: state.filterReducer.states,
+    types: state.filterReducer.types,
+    periods: state.filterReducer.periods
 })
 
 const mapDispatchToProps = {

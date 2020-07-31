@@ -41,19 +41,21 @@ const  MapComponent = (props) => {
     for(let place of nhlList){
       let lat = convertLat(place.latitude)
       let long = convertLong(place.longitude)
-      placeMarkers.push(
-        <Marker key={place.info_link} latitude={lat} longitude={long}>
-          <button className = 'marker-btn' style={{border: 'rgba(0,0,0,0)', backgroundColor: 'rgba(0,0,0,0)'}} onClick={(e) =>{
-            e.preventDefault();
-            props.setThisPlace(place)}
-          }>
-            <EmojiFlagsIcon />
-          </button>
-        </Marker>)
+      if(props.states.includes(place.state) || props.states.length == 0){
+        placeMarkers.push(
+          <Marker key={place.info_link} latitude={lat} longitude={long}>
+            <button className = 'marker-btn' style={{border: 'rgba(0,0,0,0)', backgroundColor: 'rgba(0,0,0,0)'}} onClick={(e) =>{
+              e.preventDefault();
+              props.setThisPlace(place)}
+            }>
+              <EmojiFlagsIcon />
+            </button>
+          </Marker>)
+      }
 
     }
     setEventMarkers(placeMarkers)
-  }, [nhlList, props.thisPlace])
+  }, [props.states, props.thisPlace])
 
   return(
       <ReactMapGl
