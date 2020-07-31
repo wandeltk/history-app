@@ -3,8 +3,9 @@ import ReactMapGl, {Marker, Popup} from 'react-map-gl'
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import EmojiFlagsIcon from '@material-ui/icons/EmojiFlags';
 import { useEffect } from 'react';
-import getAllNHL from '../../Remote/remote-service'
-import PlacePopup from '../Popup/PlacePopupContainer'
+import getAllNHL from '../../Remote/remote-service';
+import PlacePopup from '../Popup/PlacePopupContainer';
+import {convertLat, convertLong} from '../../util/convertCoords'
 
 
 const  MapComponent = (props) => {
@@ -38,11 +39,12 @@ const  MapComponent = (props) => {
     getAllPlaces()
 
     for(let place of nhlList){
-      let lat = (+(place.latitude.match(/\d+/g)[0]) + (+(place.latitude.match(/\d+/g)[1])/60) + (+(place.latitude.match(/\d+/g)[2])/3600))
-      let long = -1 * (+(place.longitude.match(/\d+/g)[0]) + (+(place.longitude.match(/\d+/g)[1])/60) + (+(place.longitude.match(/\d+/g)[2])/3600))
+      let lat = convertLat(place.latitude)
+      let long = convertLong(place.longitude)
       placeMarkers.push(
         <Marker key={place.info_link} latitude={lat} longitude={long}>
-          <button className = 'marker-btn' onClick={() =>{
+          <button className = 'marker-btn' style={{border: 'rgba(0,0,0,0)', backgroundColor: 'rgba(0,0,0,0)'}} onClick={(e) =>{
+            e.preventDefault();
             props.setThisPlace(place)}
           }>
             <EmojiFlagsIcon />
@@ -54,7 +56,7 @@ const  MapComponent = (props) => {
   }, [nhlList, props.thisPlace])
 
   return(
-      <ReactMapGl 
+      <ReactMapGl
         {...veiwport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/wandeltk/ckcnkzybx2p351io6wncn8r9h"
@@ -69,10 +71,10 @@ const  MapComponent = (props) => {
 
         {props.thisPlace? (
         <Popup 
-          latitude={(+(props.thisPlace?.latitude?.match(/\d+/g)[0]) + (+(props.thisPlace?.latitude?.match(/\d+/g)[1])/60) + (+(props.thisPlace?.latitude?.match(/\d+/g)[2])/3600))} 
-          longitude={-1 * (+(props.thisPlace?.longitude?.match(/\d+/g)[0]) + (+(props.thisPlace?.longitude?.match(/\d+/g)[1])/60) + (+(props.thisPlace?.longitude?.match(/\d+/g)[2])/3600))}
+          latitude={convertLat(props.thisPlace.latitude)} 
+          longitude={convertLong(props.thisPlace.longitude)}
           onClose={() =>{
-            props.clearThisPlace()
+            setTimeout(function(){props.clearThisPlace()}, 50)
           }}> 
           <PlacePopup/>
         </Popup>

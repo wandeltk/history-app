@@ -4,7 +4,7 @@ export const PlacePopupComponent = (props) => {
 
     return (
         <>
-            <h2>{props?.thisPlace?.nhl_name}</h2>
+            <h2>{props?.thisPlace?.name}</h2>
             <img src={props?.thisPlace?.image_link}></img>
             <p>
                 Latitude: {props?.thisPlace?.latitude}
