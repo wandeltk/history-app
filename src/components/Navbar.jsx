@@ -1,6 +1,7 @@
 import React from 'react'
 import Login from './Login/LoginContainter'
-import Register from './Register'
+import {Link} from 'react-router-dom'
+import {Menu} from 'semantic-ui-react'
 
 export default class Navbar extends React.Component{
 
@@ -14,8 +15,8 @@ export default class Navbar extends React.Component{
     render() {
         return(
             <>
-                <div className="ui large menu" style={{height: "5vh", margin: "auto"}}>
-                    <a className="active item">Home</a>
+                <Menu size="large" >
+                    <Link to="/"><a className="item" style={{height:'100%'}}>Home</a></Link>
                     <a className="item">Map</a>
                     <a className="item" >My Places</a>
                     <div className="right menu">
@@ -23,11 +24,11 @@ export default class Navbar extends React.Component{
                             <a className="item">Logout</a>:
                             <>
                                 <Login/>
-                                <Register/>
+                                <Link to="/register"><a className="item" style={{height:'100%', backgroundColor: '#59bdff', color:'white'}}>Register</a></Link>
                             </>
                         }
                     </div>
-                </div>
+                </Menu>
             </>
         )
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import Map from './Map/MapContainer'
 import SearchMap from './SearchMap/SearchMapContainer'
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
+import {Button, Dimmer, Loader} from 'semantic-ui-react'
 
 export default class Explore extends React.Component{
 
@@ -9,13 +10,10 @@ export default class Explore extends React.Component{
         return (
             <>
                 <div className="ui grid" style={{margin: "auto"}}>
-                    <div className="sixteen wide column">
-                        
-                    </div>
                     <div className="twelve wide column">
-                        <div className="twelve wide column">
+                        <div className="twelve wide column" style={{marginBottom: '1%'}}>
                             <h1 className="ui header">
-                                <ExploreOutlinedIcon style={{fontSize: 60}}/>
+                                <img src='https://image.flaticon.com/icons/svg/814/814513.svg'/>
                                 <div className="content">
                                     Explore
                                     <div className="sub header">Check out history near you!</div>
@@ -23,7 +21,10 @@ export default class Explore extends React.Component{
                             </h1>
                         </div>
                         <div className="twelve wide column" style={{height: "83vh"}}>
-                            <Map></Map>
+                                
+                            <Map>
+                                
+                            </Map>
                         </div>
                     </div>
                     <div className="four wide column" style={{margin: 0}}>

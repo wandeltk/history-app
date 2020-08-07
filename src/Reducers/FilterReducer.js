@@ -1,6 +1,6 @@
 
 const initialState = {
-    types: [],
+    types: ['nhl', 'events'],
     states: [],
     periods: []
 }

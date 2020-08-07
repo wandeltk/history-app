@@ -1,23 +1,18 @@
 import {client} from './client';
 
 
-const authentication = async (un, pw) => {
-    let response = await client.post('/user/auth', {un, pw});
+export const auth = async (creds) => {
+    let response = await client.post('/users/auth', (creds));
     return await response.data;
 }
 
-const logout = async () => {
-    let response = await client.get('/user/auth');
+export const register = async (user) => {
+    let response = await client.post('/users', (user));
     return await response.data;
 }
 
-const getAllNHL = async () => {
+export const getAllNHL = async () => {
     let response = await client.get('/nhl');
     return await response.data;
 }
 
-export default (
-    logout,
-    authentication,
-    getAllNHL
-)

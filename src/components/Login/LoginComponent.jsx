@@ -1,23 +1,45 @@
 import { Modal, Image, } from 'semantic-ui-react'
 import React from 'react'
+import {Link} from 'react-router-dom'
+import { useState } from 'react'
+import {auth} from '../../Remote/remote-service'
    
 
 
 const LoginComponent = (props) => { 
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [showModal, setShowModal] = useState(false)
 
-    const login = () => {
-        console.log('login')
+    const loginUser = async (e) => {
+        e.preventDefault();
+        let authUser
+        try {
+            authUser = await auth({username: username, password: password})
+            setShowModal(false)
+        } catch (x) {
+            console.log(x)
+        }
+        console.log(authUser)
+    }
+
+    const setVals = (e) => {
+        if(e.target.id === 'username'){
+            setUsername(e.target.value)
+        } else if(e.target.id === 'password'){
+            setPassword(e.target.value)
+        }
     }
 
     window.onkeypress = (event) => {
         let key = event.key.toUpperCase();
         if(key === 'ENTER' && Modal.open === true) {
-            login();    
+            loginUser();    
         }
     }
 
     return(
-        <Modal trigger={<a className="item">Login</a>}>
+        <Modal trigger={<a className="item" onClick={() => {setShowModal(true)}}>Login</a>} open={showModal}>
             <Modal.Header>Login</Modal.Header>
             <Modal.Content image>
             <Image wrapped size='medium' src='https://i.imgur.com/lqRo3pp.png' />
@@ -27,16 +49,17 @@ const LoginComponent = (props) => {
                             What will you discover today?
                         </div>
                 </h1>
-                <form class="ui form">
-                    <div class="field">
+                <form className="ui form">
+                    <div className="field">
                         <label>Username</label>
-                        <input placeholder="Username" autoFocus/>
+                        <input id="username" placeholder="Username" onChange={setVals} autoFocus/>
                     </div>
-                    <div class="field">
+                    <div className="field">
                         <label>Password</label>
-                        <input type='password' placeholder="Password" />
+                        <input id="password" type='password' placeholder="Password" onChange={setVals} />
                     </div>
-                    <button class="ui button" onClick={login}>Login</button>
+                    <div><Link to={'/register'}>Dont have an account? Sign up!</Link></div>
+                    <button style={{marginTop: '5px'}} className="ui button" onClick={loginUser}>Login</button>
                 </form>
             </Modal.Description>
             </Modal.Content>

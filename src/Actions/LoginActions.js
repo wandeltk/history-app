@@ -1,5 +1,5 @@
 
-import authenticate from '../Remote/remote-service';
+import {auth} from '../Remote/remote-service';
 import {store} from '../index';
 
 export const loginActionTypes = {
@@ -10,39 +10,37 @@ export const loginActionTypes = {
     SUCCESSFUL_LOGOUT: 'SUCCESSFUL_LOGOUT'
 }
 
-async function loginAction (un, pw){
+async function loginAction (authUser){
 
-    try {
-        let authUser = await authenticate(un, pw);
+    if(authUser !== {}){
         return({
             type: loginActionTypes.SUCCESSFUL_LOGIN,
             payload: authUser
         })
     }
-    catch(e) {
+    else {
+        // let status = e.response.status;
 
-        let status = e.response.status;
-
-        if (status === 400){
-            return({
-                type: loginActionTypes.BAD_REQUEST_ERROR,
-                payload: "You've sent a request that we don't know how to handle"
-            }) 
-        } else if (status === 401){
+        // if (status === 400){
+        //     return({
+        //         type: loginActionTypes.BAD_REQUEST_ERROR,
+        //         payload: "You've sent a request that we don't know how to handle"
+        //     }) 
+        // } else if (status === 401){
             return({
                 type: loginActionTypes.INVALID_CREDENTIALS,
                 payload: "The username or password entered was invalid, please try logging in again or register for an account."
             })
-        } else {
-            return({
-                type: loginActionTypes.SERVER_ERROR,
-                payload: "Sorry, there was a problem on our end!"
-            })
-        }
+        // } else {
+        //     return({
+        //         type: loginActionTypes.SERVER_ERROR,
+        //         payload: "Sorry, there was a problem on our end!"
+        //     })
+        // }
     }
 }
 
-export const login = async (un, pw) => store.dispatch(await loginAction(un, pw))
+export const login = (authUser) => store.dispatch(loginAction(authUser))
 
 async function logoutAction (){
     return {

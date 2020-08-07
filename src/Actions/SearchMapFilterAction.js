@@ -12,7 +12,7 @@ export const setTypeFilter = (types) => store.dispatch(setTypeFilterAction(types
 const resetTypeFilterAction = () => {
     return({
         type: 'RESET_TYPE_FILTER',
-        payload: []
+        payload: ['nhl', 'events']
     })
 }
 
