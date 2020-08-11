@@ -9,17 +9,17 @@ export default class Explore extends React.Component{
     render() {
         return (
             <>
-                <div className="ui grid" style={{margin: "auto"}}>
+                <div className="ui grid" style={{margin: "auto"}} >
                     <div className="twelve wide column">
-                        <div className="twelve wide column" style={{marginBottom: '1%'}}>
+                        {/* <div className="twelve wide column" style={{marginBottom: '1%'}}>
                             <h1 className="ui header">
                                 <img src='https://image.flaticon.com/icons/svg/814/814513.svg'/>
                                 <div className="content">
-                                    Explore
+                                    Splore
                                     <div className="sub header">Check out history near you!</div>
                                 </div>
                             </h1>
-                        </div>
+                        </div> */}
                         <div className="twelve wide column" style={{height: "83vh"}}>
                                 
                             <Map>

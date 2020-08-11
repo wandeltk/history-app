@@ -7,7 +7,8 @@ const mapStateToProps = (state) => ({
     thisPlace: state.thisPlaceReducer.thisPlace,
     states: state.filterReducer.states,
     types: state.filterReducer.types,
-    periods: state.filterReducer.periods
+    periods: state.filterReducer.periods,
+    authUser: state.authReducer.authUser,
 })
 
 const mapDispatchToProps = {

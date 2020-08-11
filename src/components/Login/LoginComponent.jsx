@@ -16,11 +16,12 @@ const LoginComponent = (props) => {
         let authUser
         try {
             authUser = await auth({username: username, password: password})
+            props.login(authUser)
             setShowModal(false)
         } catch (x) {
-            console.log(x)
+            console.log('error')
         }
-        console.log(authUser)
+
     }
 
     const setVals = (e) => {
@@ -39,7 +40,7 @@ const LoginComponent = (props) => {
     }
 
     return(
-        <Modal trigger={<a className="item" onClick={() => {setShowModal(true)}}>Login</a>} open={showModal}>
+        <Modal closeIcon onClose={() =>{setShowModal(false)}} trigger={<a className="item" onClick={() => {setShowModal(true)}}>Login</a>} open={showModal}>
             <Modal.Header>Login</Modal.Header>
             <Modal.Content image>
             <Image wrapped size='medium' src='https://i.imgur.com/lqRo3pp.png' />

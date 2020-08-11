@@ -10,7 +10,7 @@ export const loginActionTypes = {
     SUCCESSFUL_LOGOUT: 'SUCCESSFUL_LOGOUT'
 }
 
-async function loginAction (authUser){
+function loginAction (authUser){
 
     if(authUser !== {}){
         return({
@@ -42,13 +42,13 @@ async function loginAction (authUser){
 
 export const login = (authUser) => store.dispatch(loginAction(authUser))
 
-async function logoutAction (){
+function logoutAction (){
     return {
         type: loginActionTypes.SUCCESSFUL_LOGOUT,
         payload: null
     }
 }
 
-export const logout = async () => store.dispatch(await logoutAction())
+export const logout = () => store.dispatch(logoutAction())
 
 

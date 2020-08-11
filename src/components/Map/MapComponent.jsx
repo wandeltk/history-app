@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import ReactMapGl, {Marker, Popup} from 'react-map-gl'
+import ReactMapGl, {Marker, Popup, Layer, Source} from 'react-map-gl'
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import EmojiFlagsIcon from '@material-ui/icons/EmojiFlags';
 import { useEffect } from 'react';
@@ -10,9 +10,8 @@ import {Button, Icon, Dimmer, Loader} from 'semantic-ui-react'
 
 
 const  MapComponent = (props) => {
-
-  const [userLat, setUserLat] = useState(36.6219)
-  const [userLong, setUserLong] = useState(-98.055)
+  const [userLat, setUserLat] = useState(props.authUser?.user_lat || 36.6219)
+  const [userLong, setUserLong] = useState(props.authUser?.user_long || -98.055)
 
   navigator.geolocation.getCurrentPosition((position) => {
     setUserLat(position.coords.latitude)
@@ -75,7 +74,7 @@ const  MapComponent = (props) => {
 
     getNHL()
 
-  }, [props.states, props.thisPlace, props.types])
+  }, [props.states, props.thisPlace, props.types, props.authUser])
 
   return(
       <>
